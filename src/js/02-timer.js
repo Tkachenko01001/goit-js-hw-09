@@ -8,7 +8,6 @@ const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
 
 btnStart.disabled = true;
-
 let selectedDate = null;
 
 const options = {
@@ -32,9 +31,8 @@ const options = {
 flatpickr("#datetime-picker", options);
 
 class Timer {
-  constructor({onTick}) {
+  constructor() {
     this.intervalId = null;
-    this.onTick = onTick;
   }
 
   start() {
@@ -44,7 +42,7 @@ class Timer {
     const currentTime = Date.now();
     const deltaTime = selectedDate - currentTime;
     const time = convertMs(deltaTime);
-    this.onTick(time);
+    updateFace(time);
     
     if (daysEl.textContent === '00' && hoursEl.textContent === '00' && 
       minutesEl.textContent === '00' && secondsEl.textContent === '00') {
@@ -56,9 +54,7 @@ class Timer {
   }
 }
 
-const timer = new Timer({ 
-  onTick: updateFace
-});
+const timer = new Timer();
 
 function pad (value) {
   return String(value).padStart(2, '0');
