@@ -25,17 +25,14 @@ function onSubmit(evt) {
  
  for (let i = 0; i < amountInput.value; i+=1) {
   
-  
-setTimeout(() => {
-  createPromise(i, Number(delayInput.value) + Number(stepInput.value * i))
+  createPromise(i + 1, Number(delayInput.value) + Number(stepInput.value) * i)
   .then(({position, delay}) => {
    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`)
   })
   .catch(({position, delay}) => {
     Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)
   })
-}, Number(delayInput.value))
-};
+}
 };
 
 
